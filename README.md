@@ -1,2 +1,2 @@
 # browser_proio
-Browser for MC events tuned to the HepSim repository
+A Java browser for MC events stored in ProIO format tuned to the HepSim repository

@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.9.2
+Created-By: 1.8.0_111-b14 (Oracle Corporation)
+Built-By: D.Blyth, S.Chekanov
+Main-Class: hepsimproio.browser.Main
+Built-Date: 20180828
+Version: 1.0
+Class-Path: lib/protobuf-java-3.4.0.jar lib/javassist-3.21.0-GA.jar li
+ b/lz4-java-1.4.1.jar lib/reflections-0.9.11.jar lib/guava-23.0.jar
+
