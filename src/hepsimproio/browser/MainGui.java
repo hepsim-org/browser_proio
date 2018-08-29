@@ -57,6 +57,7 @@ public class MainGui {
 	private String mess = "";
 	private long ev_current = -1;;
 	private String protofile="";
+        private String protoname="";
 	private String logfile="";
 	private long maxevents=0;
 	private Map<String, ByteString> metadata;
@@ -286,6 +287,20 @@ public class MainGui {
 
 
 
+
+       Map<String, Descriptors.FileDescriptor> fileDescriptors = reader.getFileDescriptors();
+       for (Map.Entry<String, Descriptors.FileDescriptor> entry : fileDescriptors.entrySet()) {
+             //System.out.println("FILE DESCRIPTOR: " + entry.getKey());
+             protofile=entry.getValue().toProto().toString();
+             protoname=entry.getKey().toString();
+             //System.out.println(entry.getValue());
+             //System.out.println(name);
+             break;
+       }
+
+
+
+
 		Map<String, String> meta = new HashMap<>();
 		metadata = storeevent.getMetadata();
 		for (Map.Entry<String, ByteString> entry : metadata.entrySet()) {
@@ -384,6 +399,7 @@ public class MainGui {
 
 
 
+
 		for (Event event : reader) {
 
 			for (long entryID : event.getTaggedEntries("MCParameters")) {
@@ -400,6 +416,7 @@ public class MainGui {
 				};
 
 			}
+
 			break;
 		}
 
@@ -732,22 +749,6 @@ public class MainGui {
 			model.addColumn("Mass (GeV)");
 			model.addColumn("Charge");
 			model.addColumn("Lifetime");
-			/*
-			                        if (header != null) {
-						for (int j = 0; j < header.getParticleDataCount(); j++) {
-							promc.io.ProMCHeaderFile.ProMCHeader.ParticleData d = header
-									.getParticleData(j);
-							String name = d.getName();
-			                                int charge=d.getCharge();
-							model.addRow(new Object[] { new Integer(j + 1),
-									new Integer(d.getId()), new String(name),
-									new Double(d.getMass()), new Integer(charge), new Double(d.getLifetime()) });
-						}
-						table.setModel(model);
-			                        }
-
-			*/
-
 		}
 	}
 
@@ -771,7 +772,7 @@ public class MainGui {
 
 
 	/**
-	 * Show ProMC.proto
+	 * Show model.proto
 	 * 
 	 * @author sergei
 	 * 
@@ -780,7 +781,7 @@ public class MainGui {
 		private static final long serialVersionUID = 1L;
 
 		ShowEventProtoAction() {
-			super("model.proto");
+			super(protoname);
 		}
 
 		public void actionPerformed(ActionEvent e) {
@@ -790,7 +791,7 @@ public class MainGui {
 				new SimpleEditor(tmp, false);
 			} else {
 				JOptionPane.showMessageDialog(frame,
-				                              "ProMC.proto not attached", "Error",
+				                              "proto model is not attached", "Error",
 				                              JOptionPane.ERROR_MESSAGE);
 			}
 
@@ -799,7 +800,7 @@ public class MainGui {
 	}
 
 	/**
-	 * Show ProMC.proto
+	 * Show model.proto
 	 * 
 	 * @author sergei
 	 * 
@@ -821,7 +822,7 @@ public class MainGui {
 
 
 	/**
-	 * Show ProMC.proto
+	 * Show logfile 
 	 * 
 	 * @author sergei
 	 * 
